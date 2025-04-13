@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>User List</h2>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading users...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    <p>{{ error }}</p>
+    <button class="btn" (click)="loadUsers()">Try Again</button>
+  </div>
+
+  <!-- Data State -->
+  <table *ngIf="!isLoading && !error && users.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Website</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.website }}</td>
+        <td>
+          <button class="btn" (click)="onViewDetails(user.id)">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && !error && users.length === 0" class="empty-state">
+    <p>No users found.</p>
+  </div>
+</div>

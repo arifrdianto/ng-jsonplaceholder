@@ -1,0 +1,40 @@
+<div class="container">
+  <button class="btn" (click)="onBack()" style="margin-bottom: 20px">
+    Back to List
+  </button>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading user details...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    <p>{{ error }}</p>
+    <button class="btn" (click)="loadUserDetails()">Try Again</button>
+  </div>
+
+  <!-- Data State -->
+  <div class="user-details" *ngIf="!isLoading && !error && user">
+    <h2>{{ user.name }}</h2>
+    <h3>Contact Information</h3>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone:</strong> {{ user.phone }}</p>
+    <p><strong>Website:</strong> {{ user.website }}</p>
+
+    <h3>Company</h3>
+    <p><strong>Name:</strong> {{ user.company.name }}</p>
+    <p><strong>Catch Phrase:</strong> {{ user.company.catchPhrase }}</p>
+
+    <h3>Address</h3>
+    <p>{{ user.address.street }}, {{ user.address.suite }}</p>
+    <p>{{ user.address.city }}, {{ user.address.zipcode }}</p>
+  </div>
+
+  <!-- Not Found State -->
+  <div *ngIf="!isLoading && !error && !user" class="error-state">
+    <p>User not found.</p>
+    <button class="btn" (click)="onBack()">Return to User List</button>
+  </div>
+</div>
